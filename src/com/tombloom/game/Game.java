@@ -5,23 +5,30 @@ import java.awt.image.BufferStrategy;
 
 public class Game extends Canvas implements Runnable {
 
-    public static final int WIDTH = 1280;
-    public static final int HEIGHT = WIDTH / 16 * 9;
+    public static final int WIDTH;
+    public static final int HEIGHT;
 
     private Thread thread;
     private boolean isRunning = false;
 
     private ObjectUpdater objectUpdater;
 
+    static{
+        PropertiesManager propertiesManager = new PropertiesManager();
+
+        WIDTH = propertiesManager.getWidth();
+        HEIGHT = propertiesManager.getHeight();
+    }
+
     public Game(){
         objectUpdater = new ObjectUpdater();
         this.addKeyListener(new InputManager(objectUpdater));
         new Window(this, WIDTH, HEIGHT, "Avoidance Game");
 
-        objectUpdater.addObject(new Player(WIDTH/2 - 32, HEIGHT/2 - 32, ObjectID.Player));
+        objectUpdater.addObject(new Player(WIDTH/2 - 32, HEIGHT/2 - 32, 32, ObjectID.Player));
 
         for(int i = 0; i < 10; i++){
-            objectUpdater.addObject(new BasicEnemy(WIDTH/2 + 8, HEIGHT/2 + 8, ObjectID.BasicEnemy));
+            objectUpdater.addObject(new BasicEnemy(WIDTH/2 + 8, HEIGHT/2 + 8, 16, ObjectID.BasicEnemy));
 
         }
     }

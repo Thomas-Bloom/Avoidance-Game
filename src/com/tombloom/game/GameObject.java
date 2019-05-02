@@ -6,10 +6,12 @@ public abstract class GameObject {
     protected int xPos, yPos;
     protected ObjectID id;
     protected int velX, velY;
+    protected int size;
 
-    public GameObject(int xPos, int yPos, ObjectID id){
+    public GameObject(int xPos, int yPos, int size, ObjectID id){
         this.xPos = xPos;
         this.yPos = yPos;
+        this.size = size;
         this.id = id;
     }
 

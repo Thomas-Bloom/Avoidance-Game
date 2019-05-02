@@ -4,8 +4,8 @@ import java.awt.*;
 import java.util.Random;
 
 public class BasicEnemy extends GameObject {
-    public BasicEnemy(int xPos, int yPos, ObjectID id){
-        super(xPos, yPos, id);
+    public BasicEnemy(int xPos, int yPos, int size, ObjectID id){
+        super(xPos, yPos, size, id);
         velX = (int)(Math.random() * ((5 - -5) + 1)) + -5;
         velY = (int)(Math.random() * ((5 - -5) + 1)) + -5;
     }
@@ -22,6 +22,6 @@ public class BasicEnemy extends GameObject {
     @Override
     public void render(Graphics g) {
         g.setColor(Color.red);
-        g.fillRect(xPos, yPos, 16, 16);
+        g.fillRect(xPos, yPos, size, size);
     }
 }

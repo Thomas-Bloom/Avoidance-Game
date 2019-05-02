@@ -5,8 +5,8 @@ import java.util.Random;
 
 public class Player extends GameObject {
 
-    public Player(int xPos, int yPos, ObjectID id){
-        super(xPos, yPos, id);
+    public Player(int xPos, int yPos, int size, ObjectID id){
+        super(xPos, yPos, size, id);
 
     }
 
@@ -25,6 +25,6 @@ public class Player extends GameObject {
         if(id.equals(ObjectID.Player))
             g.setColor(Color.cyan);
 
-        g.fillRect(xPos, yPos, 32, 32);
+        g.fillRect(xPos, yPos, size, size);
     }
 }
