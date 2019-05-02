@@ -18,7 +18,11 @@ public class Player extends GameObject {
 
     @Override
     public void render(Graphics g) {
-        g.setColor(Color.white);
+        if(id.equals(ObjectID.Player))
+            g.setColor(Color.cyan);
+        if(id.equals(ObjectID.Player2))
+            g.setColor(Color.white);
+
         g.fillRect(xPos, yPos, 32, 32);
     }
 }

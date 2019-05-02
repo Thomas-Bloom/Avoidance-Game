@@ -15,9 +15,11 @@ public class Game extends Canvas implements Runnable {
 
     public Game(){
         objectUpdater = new ObjectUpdater();
+        this.addKeyListener(new InputManager(objectUpdater));
         new Window(this, WIDTH, HEIGHT, "Avoidance Game");
 
         objectUpdater.addObject(new Player(WIDTH/2 - 32, HEIGHT/2 - 32, ObjectID.Player));
+        objectUpdater.addObject(new Player(WIDTH/2 - 32 + 100, HEIGHT/2 - 32, ObjectID.Player2));
 
     }
 
