@@ -14,14 +14,16 @@ public class Player extends GameObject {
     public void tick() {
         xPos += velX;
         yPos += velY;
+
+        xPos = Game.clamp(xPos, 0, Game.WIDTH - 36);
+        yPos = Game.clamp(yPos, 0, Game.HEIGHT - 64);
+
     }
 
     @Override
     public void render(Graphics g) {
         if(id.equals(ObjectID.Player))
             g.setColor(Color.cyan);
-        if(id.equals(ObjectID.Player2))
-            g.setColor(Color.white);
 
         g.fillRect(xPos, yPos, 32, 32);
     }

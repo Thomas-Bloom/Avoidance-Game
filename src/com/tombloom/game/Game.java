@@ -19,8 +19,11 @@ public class Game extends Canvas implements Runnable {
         new Window(this, WIDTH, HEIGHT, "Avoidance Game");
 
         objectUpdater.addObject(new Player(WIDTH/2 - 32, HEIGHT/2 - 32, ObjectID.Player));
-        objectUpdater.addObject(new Player(WIDTH/2 - 32 + 100, HEIGHT/2 - 32, ObjectID.Player2));
 
+        for(int i = 0; i < 10; i++){
+            objectUpdater.addObject(new BasicEnemy(WIDTH/2 + 8, HEIGHT/2 + 8, ObjectID.BasicEnemy));
+
+        }
     }
 
     public synchronized void start(){
@@ -92,6 +95,18 @@ public class Game extends Canvas implements Runnable {
 
         g.dispose();
         bs.show();
+    }
+
+    public static int clamp(int var, int min, int max){
+        if(var >= max){
+            return (var = max);
+        }
+        else if(var <= min){
+            return (var = min);
+        }
+        else{
+            return var;
+        }
     }
 
     public static void main(String[] args) {

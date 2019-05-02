@@ -2,6 +2,7 @@ package com.tombloom.game;
 
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.security.Key;
 
 public class InputManager extends KeyAdapter {
     private ObjectUpdater objectUpdater;
@@ -37,6 +38,7 @@ public class InputManager extends KeyAdapter {
                 }
             }
         }
+        if(key == KeyEvent.VK_ESCAPE) System.exit(1);
 
     }
 

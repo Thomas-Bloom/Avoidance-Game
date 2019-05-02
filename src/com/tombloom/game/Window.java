@@ -28,6 +28,8 @@ public class Window extends Canvas {
         // Allow the window to be viewed by the user
         frame.setVisible(true);
 
+        frame.requestFocus();
+
         // Start the game's thread
         game.start();
     }
