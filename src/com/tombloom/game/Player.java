@@ -1,13 +1,11 @@
 package com.tombloom.game;
 
 import java.awt.*;
-import java.util.Random;
 
 public class Player extends GameObject {
 
     public Player(int xPos, int yPos, int size, ObjectID id){
         super(xPos, yPos, size, id);
-
     }
 
     @Override
@@ -17,7 +15,6 @@ public class Player extends GameObject {
 
         xPos = Game.clamp(xPos, 0, Game.WIDTH - 36);
         yPos = Game.clamp(yPos, 0, Game.HEIGHT - 64);
-
     }
 
     @Override

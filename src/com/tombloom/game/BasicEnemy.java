@@ -1,7 +1,6 @@
 package com.tombloom.game;
 
 import java.awt.*;
-import java.util.Random;
 
 public class BasicEnemy extends GameObject {
     public BasicEnemy(int xPos, int yPos, int size, ObjectID id){

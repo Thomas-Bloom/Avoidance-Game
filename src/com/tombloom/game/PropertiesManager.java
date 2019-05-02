@@ -7,6 +7,7 @@ public class PropertiesManager {
     private static final String PATH = "config.properties";
     private int height;
     private int width;
+    private float fpsLimit;
 
     public PropertiesManager(){
         File file = new File(PATH);
@@ -18,11 +19,9 @@ public class PropertiesManager {
             createProperties();
             loadProperties();
         }
-
     }
 
     private void loadProperties(){
-        System.out.println("Checking Config file...");
         File file = new File(PATH);
 
         try{
@@ -32,6 +31,7 @@ public class PropertiesManager {
 
             height = Integer.valueOf(properties.getProperty("height"));
             width = Integer.valueOf(properties.getProperty("width"));
+            fpsLimit = Float.valueOf(properties.getProperty("fpsLimit"));
 
             reader.close();
         }
@@ -51,6 +51,7 @@ public class PropertiesManager {
 
             properties.setProperty("width", "1280");
             properties.setProperty("height", "720");
+            properties.setProperty("fpsLimit", "60.0");
 
             FileWriter writer = new FileWriter(file);
             properties.store(writer, "Game Settings");
@@ -64,11 +65,15 @@ public class PropertiesManager {
         }
     }
 
-    public int getHeight() {
+    int getHeight() {
         return height;
     }
 
-    public int getWidth() {
+    int getWidth() {
         return width;
+    }
+
+    float getFpsLimit() {
+        return fpsLimit;
     }
 }

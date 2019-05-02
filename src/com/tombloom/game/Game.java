@@ -7,6 +7,7 @@ public class Game extends Canvas implements Runnable {
 
     public static final int WIDTH;
     public static final int HEIGHT;
+    private static final float FPSLIMIT;
 
     private Thread thread;
     private boolean isRunning = false;
@@ -18,6 +19,7 @@ public class Game extends Canvas implements Runnable {
 
         WIDTH = propertiesManager.getWidth();
         HEIGHT = propertiesManager.getHeight();
+        FPSLIMIT = propertiesManager.getFpsLimit();
     }
 
     public Game(){
@@ -29,7 +31,6 @@ public class Game extends Canvas implements Runnable {
 
         for(int i = 0; i < 10; i++){
             objectUpdater.addObject(new BasicEnemy(WIDTH/2 + 8, HEIGHT/2 + 8, 16, ObjectID.BasicEnemy));
-
         }
     }
 
@@ -51,7 +52,7 @@ public class Game extends Canvas implements Runnable {
 
     public void run(){
         long lastTime = System.nanoTime();
-        double amountOfTicks = 60.0;
+        double amountOfTicks = FPSLIMIT;
         double ns = 1000000000 / amountOfTicks;
         double delta = 0;
         long timer = System.currentTimeMillis();
