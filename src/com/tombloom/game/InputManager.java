@@ -6,6 +6,7 @@ import java.awt.event.KeyEvent;
 public class InputManager extends KeyAdapter {
     private ObjectUpdater objectUpdater;
 
+    // Used to stop key press delay
     private boolean upPressed, downPressed, leftPressed, rightPressed;
 
     public InputManager(ObjectUpdater objectUpdater){
