@@ -13,6 +13,8 @@ public class Game extends Canvas implements Runnable {
     private boolean isRunning = false;
 
     private ObjectUpdater objectUpdater;
+    private HUD hud;
+    private GameState gameState;
 
     static{
         PropertiesManager propertiesManager = new PropertiesManager();
@@ -23,7 +25,9 @@ public class Game extends Canvas implements Runnable {
     }
 
     public Game(){
+        gameState = new GameState();
         objectUpdater = new ObjectUpdater();
+        hud = new HUD(gameState);
         this.addKeyListener(new InputManager(objectUpdater));
         new Window(this, WIDTH, HEIGHT, "Avoidance Game");
 
@@ -51,6 +55,7 @@ public class Game extends Canvas implements Runnable {
     }
 
     public void run(){
+        this.requestFocus();
         long lastTime = System.nanoTime();
         double amountOfTicks = FPSLIMIT;
         double ns = 1000000000 / amountOfTicks;
@@ -85,6 +90,7 @@ public class Game extends Canvas implements Runnable {
 
     private void tick(){
         objectUpdater.tick();
+        hud.tick();
     }
 
     private void render(){
@@ -100,6 +106,7 @@ public class Game extends Canvas implements Runnable {
         g.fillRect(0, 0, WIDTH, HEIGHT);
 
         objectUpdater.render(g);
+        hud.render(g);
 
         g.dispose();
         bs.show();
