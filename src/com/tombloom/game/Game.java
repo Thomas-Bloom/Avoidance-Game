@@ -27,14 +27,14 @@ public class Game extends Canvas implements Runnable {
     public Game(){
         gameState = new GameState();
         objectUpdater = new ObjectUpdater();
-        hud = new HUD(gameState);
+        hud = new HUD();
         this.addKeyListener(new InputManager(objectUpdater));
         new Window(this, WIDTH, HEIGHT, "Avoidance Game");
 
-        objectUpdater.addObject(new Player(WIDTH/2 - 32, HEIGHT/2 - 32, 32, ObjectID.Player));
+        objectUpdater.addObject(new Player(WIDTH/2 - 32, HEIGHT/2 - 32, 32, ObjectID.Player, objectUpdater));
 
         for(int i = 0; i < 10; i++){
-            objectUpdater.addObject(new BasicEnemy(WIDTH/2 + 8, HEIGHT/2 + 8, 16, ObjectID.BasicEnemy));
+            objectUpdater.addObject(new BasicEnemy(WIDTH/2 + 8, 20, 16, ObjectID.BasicEnemy));
         }
     }
 
@@ -91,6 +91,7 @@ public class Game extends Canvas implements Runnable {
     private void tick(){
         objectUpdater.tick();
         hud.tick();
+        gameState.tick();
     }
 
     private void render(){

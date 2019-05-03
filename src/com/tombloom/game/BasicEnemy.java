@@ -23,4 +23,9 @@ public class BasicEnemy extends GameObject {
         g.setColor(Color.red);
         g.fillRect(xPos, yPos, size, size);
     }
+
+    @Override
+    public Rectangle getBounds() {
+        return new Rectangle(xPos, yPos, size, size);
+    }
 }

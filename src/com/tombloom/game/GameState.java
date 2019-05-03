@@ -1,21 +1,21 @@
 package com.tombloom.game;
 
 public class GameState {
-    private int health;
+    public static int health;
 
     public GameState(){
         health = 100;
     }
 
-    public int getHealth() {
-        return health;
+    public void tick(){
+        setHealth(Game.clamp(health, 0, 100));
     }
 
-    public void reduceHealth(int amount){
+    public static void reduceHealth(int amount){
         health -= amount;
     }
 
-    public void setHealth(int value){
+    public static void setHealth(int value){
         health = value;
     }
 }
