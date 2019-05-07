@@ -5,9 +5,9 @@ import java.awt.image.BufferStrategy;
 
 public class Game extends Canvas implements Runnable {
 
-    public static final int WIDTH;
-    public static final int HEIGHT;
-    private static final float FPSLIMIT;
+    public static int width;
+    public static int height;
+    private float fpsLmit;
 
     private Thread thread;
     private boolean isRunning = false;
@@ -15,27 +15,36 @@ public class Game extends Canvas implements Runnable {
     private ObjectUpdater objectUpdater;
     private HUD hud;
     private GameState gameState;
+    private InputManager inputManager;
 
-    static{
-        PropertiesManager propertiesManager = new PropertiesManager();
-
-        WIDTH = propertiesManager.getWidth();
-        HEIGHT = propertiesManager.getHeight();
-        FPSLIMIT = propertiesManager.getFpsLimit();
-    }
 
     public Game(){
         gameState = new GameState();
         objectUpdater = new ObjectUpdater();
+        inputManager = new InputManager(objectUpdater);
+        loadProperties();
         hud = new HUD();
-        this.addKeyListener(new InputManager(objectUpdater));
-        new Window(this, WIDTH, HEIGHT, "Avoidance Game");
+        this.addKeyListener(inputManager);
+        new Window(this, width, height, "Avoidance Game");
 
-        objectUpdater.addObject(new Player(WIDTH/2 - 32, HEIGHT/2 - 32, 32, ObjectID.Player, objectUpdater));
+        objectUpdater.addObject(new Player(width/2 - 32, height/2 - 32, 32, ObjectID.Player, objectUpdater));
 
         for(int i = 0; i < 10; i++){
-            objectUpdater.addObject(new BasicEnemy(WIDTH/2 + 8, 20, 16, ObjectID.BasicEnemy));
+            objectUpdater.addObject(new BasicEnemy(width/2 + 8, 20, 16, ObjectID.BasicEnemy, objectUpdater));
         }
+    }
+
+    private void loadProperties(){
+        PropertiesManager propertiesManager = new PropertiesManager();
+
+        width = propertiesManager.getWidth();
+        height = propertiesManager.getHeight();
+        fpsLmit = propertiesManager.getFpsLimit();
+
+        inputManager.setUpKey(propertiesManager.getUpKey());
+        inputManager.setDownKey(propertiesManager.getDownKey());
+        inputManager.setLeftKey(propertiesManager.getLeftKey());
+        inputManager.setRightKey(propertiesManager.getRightKey());
     }
 
     public synchronized void start(){
@@ -57,7 +66,7 @@ public class Game extends Canvas implements Runnable {
     public void run(){
         this.requestFocus();
         long lastTime = System.nanoTime();
-        double amountOfTicks = FPSLIMIT;
+        double amountOfTicks = fpsLmit;
         double ns = 1000000000 / amountOfTicks;
         double delta = 0;
         long timer = System.currentTimeMillis();
@@ -104,7 +113,7 @@ public class Game extends Canvas implements Runnable {
 
         Graphics g = bs.getDrawGraphics();
         g.setColor(Color.black);
-        g.fillRect(0, 0, WIDTH, HEIGHT);
+        g.fillRect(0, 0, width, height);
 
         objectUpdater.render(g);
         hud.render(g);

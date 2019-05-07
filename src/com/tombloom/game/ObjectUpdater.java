@@ -7,8 +7,8 @@ public class ObjectUpdater {
     LinkedList<GameObject> objectList = new LinkedList<>();
 
     public void tick(){
-        for (GameObject go : objectList) {
-            go.tick();
+        for(int i = 0; i < objectList.size(); i++){
+            objectList.get(i).tick();
         }
     }
 

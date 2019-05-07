@@ -9,6 +9,8 @@ public class PropertiesManager {
     private int width;
     private float fpsLimit;
 
+    private String upKey, downKey, leftKey, rightKey;
+
     public PropertiesManager(){
         File file = new File(PATH);
 
@@ -33,6 +35,11 @@ public class PropertiesManager {
             width = Integer.valueOf(properties.getProperty("width"));
             fpsLimit = Float.valueOf(properties.getProperty("fpsLimit"));
 
+            upKey = properties.getProperty("upKey");
+            downKey = properties.getProperty("downKey");
+            leftKey = properties.getProperty("leftKey");
+            rightKey = properties.getProperty("rightKey");
+
             reader.close();
         }
         catch(FileNotFoundException e){
@@ -52,6 +59,12 @@ public class PropertiesManager {
             properties.setProperty("width", "1280");
             properties.setProperty("height", "720");
             properties.setProperty("fpsLimit", "60.0");
+
+            properties.setProperty("upKey", "W");
+            properties.setProperty("downKey", "S");
+            properties.setProperty("leftKey", "A");
+            properties.setProperty("rightKey", "D");
+
 
             FileWriter writer = new FileWriter(file);
             properties.store(writer, "Game Settings");
@@ -75,5 +88,21 @@ public class PropertiesManager {
 
     float getFpsLimit() {
         return fpsLimit;
+    }
+
+    public String getUpKey() {
+        return upKey;
+    }
+
+    public String getDownKey() {
+        return downKey;
+    }
+
+    public String getLeftKey() {
+        return leftKey;
+    }
+
+    public String getRightKey() {
+        return rightKey;
     }
 }

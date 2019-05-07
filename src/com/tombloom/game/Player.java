@@ -16,10 +16,12 @@ public class Player extends GameObject {
         xPos += velX;
         yPos += velY;
 
-        xPos = Game.clamp(xPos, 0, Game.WIDTH - 36);
-        yPos = Game.clamp(yPos, 0, Game.HEIGHT - 64);
+        xPos = Game.clamp(xPos, 0, Game.width - 36);
+        yPos = Game.clamp(yPos, 0, Game.height - 64);
 
         collision();
+
+        objectUpdater.addObject(new Trail(xPos, yPos, size, ObjectID.Trail, Color.cyan, 0.1f, objectUpdater));
     }
 
     @Override
@@ -40,6 +42,8 @@ public class Player extends GameObject {
             if(go.getId() == ObjectID.BasicEnemy){
                 if(getBounds().intersects(go.getBounds())){
                     GameState.reduceHealth(2);
+                    //go.velX *= -1;
+                    //go.velY *= -1;
                 }
             }
         }

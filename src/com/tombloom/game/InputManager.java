@@ -2,10 +2,11 @@ package com.tombloom.game;
 
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.security.Key;
 
 public class InputManager extends KeyAdapter {
     private ObjectUpdater objectUpdater;
+
+    private String upKey, downKey, leftKey, rightKey;
 
     // Used to stop key press delay
     private boolean upPressed, downPressed, leftPressed, rightPressed;
@@ -92,5 +93,21 @@ public class InputManager extends KeyAdapter {
                 }
             }
         }
+    }
+
+    public void setUpKey(String upKey) {
+        this.upKey = upKey;
+    }
+
+    public void setDownKey(String downKey) {
+        this.downKey = downKey;
+    }
+
+    public void setLeftKey(String leftKey) {
+        this.leftKey = leftKey;
+    }
+
+    public void setRightKey(String rightKey) {
+        this.rightKey = rightKey;
     }
 }
