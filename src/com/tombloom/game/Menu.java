@@ -44,7 +44,7 @@ public class Menu extends MouseAdapter {
             g.drawString("- Use WASD to control your player", (Game.width / 2) - 300, 350);
             g.drawString("- Press ESC (while in game) to go back to the main menu", (Game.width / 2) - 300, 400);
             g.drawString("- Press ESC (while on main menu) to exit the game", (Game.width / 2) - 300, 450);
-            
+
             g.drawRect((Game.width / 2) - 100, (Game.height - 100), 200, 50);
             g.drawString("Back", (Game.width / 2) - 30, Game.height - 65);
         }

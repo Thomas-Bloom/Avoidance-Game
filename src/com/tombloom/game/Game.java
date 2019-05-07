@@ -38,7 +38,7 @@ public class Game extends Canvas implements Runnable {
         mainMenu = new Menu(this);
         this.addMouseListener(mainMenu);
         this.addKeyListener(inputManager);
-        new Window(this, width, height, "Avoidance Game");
+        new Window(this, width, height, "Dodge Blocks");
 
         if(currentState == STATE.Game) {
            loadGame();
