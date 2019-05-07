@@ -5,14 +5,16 @@ import java.awt.event.KeyEvent;
 
 public class InputManager extends KeyAdapter {
     private ObjectUpdater objectUpdater;
+    private Game game;
 
     private String upKey, downKey, leftKey, rightKey;
 
     // Used to stop key press delay
     private boolean upPressed, downPressed, leftPressed, rightPressed;
 
-    public InputManager(ObjectUpdater objectUpdater){
+    public InputManager(ObjectUpdater objectUpdater, Game game){
         this.objectUpdater = objectUpdater;
+        this.game = game;
     }
 
     public void keyPressed(KeyEvent e){
@@ -39,7 +41,10 @@ public class InputManager extends KeyAdapter {
                 }
             }
         }
-        if(key == KeyEvent.VK_ESCAPE) System.exit(1);
+        if(key == KeyEvent.VK_ESCAPE){
+            //game.currentState = Game.STATE.Menu;
+            System.exit(1);
+        }
 
     }
 

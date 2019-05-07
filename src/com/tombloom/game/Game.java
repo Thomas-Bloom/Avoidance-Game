@@ -5,6 +5,13 @@ import java.awt.image.BufferStrategy;
 
 public class Game extends Canvas implements Runnable {
 
+    public enum STATE{
+        Menu,
+        Game,
+        Help
+    }
+
+    public STATE currentState = STATE.Menu;
     public static int width;
     public static int height;
     private float fpsLmit;
@@ -18,26 +25,38 @@ public class Game extends Canvas implements Runnable {
     private InputManager inputManager;
     private EnemySpawner enemySpawner;
 
+    private MainMenu mainMenu;
+
     public Game(){
         gameState = new GameState();
         objectUpdater = new ObjectUpdater();
-        inputManager = new InputManager(objectUpdater);
+        inputManager = new InputManager(objectUpdater, this);
         loadProperties();
         hud = new HUD();
         enemySpawner = new EnemySpawner(objectUpdater, hud);
+        mainMenu = new MainMenu(this, objectUpdater);
+        this.addMouseListener(mainMenu);
         this.addKeyListener(inputManager);
         new Window(this, width, height, "Avoidance Game");
 
-        objectUpdater.addObject(new Player(width/2 - 32, height/2 - 32, 32, ObjectID.Player, objectUpdater));
-
-        objectUpdater.addObject(new BasicEnemy(width/2 + 8, 20, 16, ObjectID.BasicEnemy, objectUpdater));
-
-        /*
-        for(int i = 0; i < 10; i++){
-            objectUpdater.addObject(new BasicEnemy(width/2 + 8, 20, 16, ObjectID.BasicEnemy, objectUpdater));
+        if(currentState == STATE.Game) {
+           loadGame();
         }
-        */
     }
+
+    public void loadGame(){
+        objectUpdater.addObject(new Player(width/2 - 32, height/2 - 32, 32, ObjectID.Player, objectUpdater));
+        objectUpdater.addObject(new BasicEnemy(width/2 + 8, 20, 16, ObjectID.BasicEnemy, objectUpdater));
+    }
+
+    /*
+    public void loadMainMenu(){
+        System.out.println("size: " + objectUpdater.objectList.size());
+        for(int i = 0; i < objectUpdater.objectList.size(); i++){
+            objectUpdater.removeObject(objectUpdater.objectList.get(i));
+        }
+    }
+    */
 
     private void loadProperties(){
         PropertiesManager propertiesManager = new PropertiesManager();
@@ -104,9 +123,15 @@ public class Game extends Canvas implements Runnable {
 
     private void tick(){
         objectUpdater.tick();
-        hud.tick();
-        gameState.tick();
-        enemySpawner.tick();
+
+        if(currentState == STATE.Game){
+            hud.tick();
+            gameState.tick();
+            enemySpawner.tick();
+        }
+        else if(currentState == STATE.Menu){
+            mainMenu.tick();
+        }
     }
 
     private void render(){
@@ -121,8 +146,14 @@ public class Game extends Canvas implements Runnable {
         g.setColor(Color.black);
         g.fillRect(0, 0, width, height);
 
+        if(currentState == STATE.Game){
+            hud.render(g);
+        }
+        else if(currentState == STATE.Menu || currentState == STATE.Help){
+            mainMenu.render(g);
+        }
+
         objectUpdater.render(g);
-        hud.render(g);
 
         g.dispose();
         bs.show();
