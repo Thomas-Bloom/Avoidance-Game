@@ -46,16 +46,16 @@ public class InputManager extends KeyAdapter {
     public void keyReleased(KeyEvent e){
         int key = e.getKeyCode();
 
-        for (GameObject go : objectUpdater.objectList) {
-            if (go.getId().equals(ObjectID.Player)) {
+        for (int i = 0; i < objectUpdater.objectList.size(); i++) {
+            if (objectUpdater.objectList.get(i).getId().equals(ObjectID.Player)) {
                 if(key == KeyEvent.VK_W){
                     upPressed = false;
 
                     if(downPressed){
-                        go.setVelY(5);
+                        objectUpdater.objectList.get(i).setVelY(5);
                     }
                     else{
-                        go.setVelY(0);
+                        objectUpdater.objectList.get(i).setVelY(0);
                     }
                 }
 
@@ -63,10 +63,10 @@ public class InputManager extends KeyAdapter {
                     downPressed = false;
 
                     if(upPressed){
-                        go.setVelY(-5);
+                        objectUpdater.objectList.get(i).setVelY(-5);
                     }
                     else{
-                        go.setVelY(0);
+                        objectUpdater.objectList.get(i).setVelY(0);
                     }
                 }
 
@@ -74,10 +74,10 @@ public class InputManager extends KeyAdapter {
                     leftPressed = false;
 
                     if(rightPressed){
-                        go.setVelX(5);
+                        objectUpdater.objectList.get(i).setVelX(5);
                     }
                     else{
-                        go.setVelX(0);
+                        objectUpdater.objectList.get(i).setVelX(0);
                     }
                 }
 
@@ -85,10 +85,10 @@ public class InputManager extends KeyAdapter {
                     rightPressed = false;
 
                     if(leftPressed){
-                        go.setVelX(-5);
+                        objectUpdater.objectList.get(i).setVelX(-5);
                     }
                     else{
-                        go.setVelX(0);
+                        objectUpdater.objectList.get(i).setVelX(0);
                     }
                 }
             }

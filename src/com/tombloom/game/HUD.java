@@ -5,7 +5,7 @@ import java.awt.*;
 public class HUD {
     private final int healthPosX = 15, healthPosY = 15;
     private final int healthWidth = 200, healthHeight = 30;
-    
+
     public void tick(){
     }
 
@@ -19,5 +19,8 @@ public class HUD {
 
         g.setColor(Color.white);
         g.drawRect(healthPosX, healthPosY, healthWidth, healthHeight);
+
+        g.drawString("Score: " + GameState.score, 15, 64);
+        g.drawString("Level: " + GameState.level, 15, 84);
     }
 }

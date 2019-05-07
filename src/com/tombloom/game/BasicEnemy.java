@@ -5,12 +5,15 @@ import java.awt.*;
 public class BasicEnemy extends GameObject {
     private ObjectUpdater objectUpdater;
 
+    private int minVelX = -7, maxVelX = 7;
+    private int minVelY = -7, maxVelY = 7;
+
     public BasicEnemy(int xPos, int yPos, int size, ObjectID id, ObjectUpdater objectUpdater){
         super(xPos, yPos, size, id);
         this.objectUpdater = objectUpdater;
 
-        velX = (int)(Math.random() * ((5 - -5) + 1)) + -5;
-        velY = (int)(Math.random() * ((5 - -5) + 1)) + -5;
+        velX = (int)(Math.random() * ((maxVelX - -minVelX) + 1)) + minVelX;
+        velY = (int)(Math.random() * ((maxVelY - -minVelY) + 1)) + minVelY;
     }
 
     @Override

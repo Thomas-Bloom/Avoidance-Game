@@ -16,7 +16,7 @@ public class Game extends Canvas implements Runnable {
     private HUD hud;
     private GameState gameState;
     private InputManager inputManager;
-
+    private EnemySpawner enemySpawner;
 
     public Game(){
         gameState = new GameState();
@@ -24,14 +24,19 @@ public class Game extends Canvas implements Runnable {
         inputManager = new InputManager(objectUpdater);
         loadProperties();
         hud = new HUD();
+        enemySpawner = new EnemySpawner(objectUpdater, hud);
         this.addKeyListener(inputManager);
         new Window(this, width, height, "Avoidance Game");
 
         objectUpdater.addObject(new Player(width/2 - 32, height/2 - 32, 32, ObjectID.Player, objectUpdater));
 
+        objectUpdater.addObject(new BasicEnemy(width/2 + 8, 20, 16, ObjectID.BasicEnemy, objectUpdater));
+
+        /*
         for(int i = 0; i < 10; i++){
             objectUpdater.addObject(new BasicEnemy(width/2 + 8, 20, 16, ObjectID.BasicEnemy, objectUpdater));
         }
+        */
     }
 
     private void loadProperties(){
@@ -101,6 +106,7 @@ public class Game extends Canvas implements Runnable {
         objectUpdater.tick();
         hud.tick();
         gameState.tick();
+        enemySpawner.tick();
     }
 
     private void render(){
