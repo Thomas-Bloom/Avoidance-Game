@@ -4,13 +4,11 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-public class MainMenu extends MouseAdapter {
+public class Menu extends MouseAdapter {
     private Game game;
-    private ObjectUpdater objectUpdater;
 
-    public MainMenu(Game game, ObjectUpdater objectUpdater){
+    public Menu(Game game){
         this.game = game;
-        this.objectUpdater = objectUpdater;
     }
 
     public void render(Graphics g){
@@ -50,7 +48,19 @@ public class MainMenu extends MouseAdapter {
             g.drawRect((Game.width / 2) - 100, (Game.height - 100), 200, 50);
             g.drawString("Back", (Game.width / 2) - 30, Game.height - 65);
         }
+        else if(game.currentState == Game.STATE.End){
+            g.setFont(titleFont);
+            g.setColor(Color.white);
 
+            g.drawString("Game Over!", (Game.width / 2) - 120, 100);
+
+            g.setFont(defaultFont);
+
+            g.drawString("Score: " + GameState.score, (Game.width / 2) - 70, 300);
+
+            g.drawRect((Game.width / 2) - 100, (Game.height - 150), 200, 50);
+            g.drawString("Back", (Game.width / 2) - 30, Game.height - 115);
+        }
     }
 
     public void tick(){
@@ -77,6 +87,10 @@ public class MainMenu extends MouseAdapter {
 
         if(mouseOverElement(mouseX, mouseY, (Game.width / 2) - 100, 400, 200, 50)  && game.currentState == Game.STATE.Menu){
             System.exit(1);
+        }
+
+        if(mouseOverElement(mouseX, mouseY, (Game.width / 2) - 100, (Game.height - 150), 200, 50)  && game.currentState == Game.STATE.End){
+            game.currentState = Game.STATE.Menu;
         }
 
 

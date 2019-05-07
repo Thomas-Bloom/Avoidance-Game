@@ -8,7 +8,8 @@ public class Game extends Canvas implements Runnable {
     public enum STATE{
         Menu,
         Game,
-        Help
+        Help,
+        End
     }
 
     public STATE currentState = STATE.Menu;
@@ -25,16 +26,16 @@ public class Game extends Canvas implements Runnable {
     private InputManager inputManager;
     private EnemySpawner enemySpawner;
 
-    private MainMenu mainMenu;
+    private Menu mainMenu;
 
     public Game(){
         gameState = new GameState();
-        objectUpdater = new ObjectUpdater();
+        objectUpdater = new ObjectUpdater(this);
         inputManager = new InputManager(objectUpdater, this);
         loadProperties();
         hud = new HUD();
         enemySpawner = new EnemySpawner(objectUpdater, hud);
-        mainMenu = new MainMenu(this, objectUpdater);
+        mainMenu = new Menu(this);
         this.addMouseListener(mainMenu);
         this.addKeyListener(inputManager);
         new Window(this, width, height, "Avoidance Game");
@@ -128,10 +129,17 @@ public class Game extends Canvas implements Runnable {
             hud.tick();
             gameState.tick();
             enemySpawner.tick();
+
+            if(GameState.health <= 0){
+                GameState.health = 100;
+                currentState = STATE.End;
+                objectUpdater.clearEnemies();
+            }
         }
-        else if(currentState == STATE.Menu){
+        else if(currentState == STATE.Menu || currentState == STATE.End){
             mainMenu.tick();
         }
+
     }
 
     private void render(){
@@ -149,7 +157,7 @@ public class Game extends Canvas implements Runnable {
         if(currentState == STATE.Game){
             hud.render(g);
         }
-        else if(currentState == STATE.Menu || currentState == STATE.Help){
+        else if(currentState == STATE.Menu || currentState == STATE.Help || currentState == STATE.End){
             mainMenu.render(g);
         }
 
