@@ -18,24 +18,24 @@ public class InputManager extends KeyAdapter {
     public void keyPressed(KeyEvent e){
         int key = e.getKeyCode();
 
-        for (GameObject go : objectUpdater.objectList) {
-            if(go.getId().equals(ObjectID.Player)){
+        for (int i = 0; i < objectUpdater.objectList.size(); i++) {
+            if(objectUpdater.objectList.get(i).getId().equals(ObjectID.Player)){
                 // Key events for player 1
                 if(key == KeyEvent.VK_W){
                     upPressed = true;
-                    go.setVelY(-5);
+                    objectUpdater.objectList.get(i).setVelY(-5);
                 }
                 if(key == KeyEvent.VK_S){
                     downPressed = true;
-                    go.setVelY(5);
+                    objectUpdater.objectList.get(i).setVelY(5);
                 }
                 if(key == KeyEvent.VK_A){
                     leftPressed = true;
-                    go.setVelX(-5);
+                    objectUpdater.objectList.get(i).setVelX(-5);
                 }
                 if(key == KeyEvent.VK_D){
                     rightPressed = true;
-                    go.setVelX(5);
+                    objectUpdater.objectList.get(i).setVelX(5);
                 }
             }
         }

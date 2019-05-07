@@ -29,19 +29,19 @@ public class Player extends GameObject {
         if(id.equals(ObjectID.Player))
             g.setColor(Color.cyan);
 
-        g.fillRect(xPos, yPos, size, size);
+        g.fillRect((int)xPos, (int)yPos, size, size);
     }
 
     @Override
     public Rectangle getBounds() {
-        return new Rectangle(xPos, yPos, size, size);
+        return new Rectangle((int)xPos, (int)yPos, size, size);
     }
 
     private void collision(){
         for (GameObject go : objectUpdater.objectList) {
-            if(go.getId() == ObjectID.BasicEnemy){
+            if(go.getId() == ObjectID.BasicEnemy || go.getId() == ObjectID.FastEnemy || go.getId() == ObjectID.FollowEnemy){
                 if(getBounds().intersects(go.getBounds())){
-                    GameState.reduceHealth(2);
+                    GameState.reduceHealth(3);
                     //go.velX *= -1;
                     //go.velY *= -1;
                 }

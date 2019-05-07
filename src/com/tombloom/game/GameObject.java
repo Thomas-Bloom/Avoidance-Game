@@ -3,12 +3,12 @@ package com.tombloom.game;
 import java.awt.*;
 
 public abstract class GameObject {
-    protected int xPos, yPos;
+    protected float xPos, yPos;
     protected ObjectID id;
-    protected int velX, velY;
+    protected float velX, velY;
     protected int size;
 
-    public GameObject(int xPos, int yPos, int size, ObjectID id){
+    public GameObject(float xPos, float yPos, int size, ObjectID id){
         this.xPos = xPos;
         this.yPos = yPos;
         this.size = size;
@@ -28,11 +28,11 @@ public abstract class GameObject {
         yPos = y;
     }
 
-    public int getxPos() {
+    public float getxPos() {
         return xPos;
     }
 
-    public int getyPos() {
+    public float getyPos() {
         return yPos;
     }
 
@@ -52,11 +52,11 @@ public abstract class GameObject {
         this.velY = velY;
     }
 
-    public int getVelX() {
+    public float getVelX() {
         return velX;
     }
 
-    public int getVelY() {
+    public float getVelY() {
         return velY;
     }
 }

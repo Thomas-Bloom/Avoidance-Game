@@ -15,7 +15,7 @@ public class HUD {
         g.fillRect(healthPosX, healthPosY, healthWidth, healthHeight);
 
         g.setColor(Color.getHSBColor((1f * GameState.health) / 360, 1f, 1f));
-        g.fillRect(healthPosX, healthPosY, GameState.health * 2 , healthHeight);
+        g.fillRect(healthPosX, healthPosY, (int)GameState.health * 2 , healthHeight);
 
         g.setColor(Color.white);
         g.drawRect(healthPosX, healthPosY, healthWidth, healthHeight);

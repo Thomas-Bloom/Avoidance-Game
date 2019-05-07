@@ -22,6 +22,16 @@ public class EnemySpawner {
             GameState.level++;
 
             objectUpdater.addObject(new BasicEnemy(random.nextInt(Game.width), random.nextInt(Game.height), 16, ObjectID.BasicEnemy, objectUpdater));
+
+            // Spawn a fast enemy if level count is odd number
+            if((GameState.level % 2) != 0){
+                objectUpdater.addObject(new FastEnemy(random.nextInt(Game.width), random.nextInt(Game.height), 16, ObjectID.FastEnemy, objectUpdater));
+            }
+
+            // Every tenth level, add enemy that follows the player around
+            if((GameState.level % 10) == 0){
+                objectUpdater.addObject(new FollowEnemy(random.nextInt(Game.width), random.nextInt(Game.height), 16, ObjectID.FollowEnemy, objectUpdater));
+            }
         }
     }
 }
