@@ -13,3 +13,6 @@ New types of enemies spawn depending on which level you are on.
 2. Place the files into a folder on your computer (Make sure not to change the folder structure)
 3. Open your favourite Java IDE and open the top-level folder
 4. Compile and run the code within your IDE
+
+## Images
+![alt text](https://github.com/Thomas-Bloom/Avoidance-Game/blob/master/Gameplay.png)
