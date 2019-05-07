@@ -42,9 +42,9 @@ public class Menu extends MouseAdapter {
 
             g.drawString("- Avoid the enemies that bounce around the screen!", (Game.width / 2) - 300, 300);
             g.drawString("- Use WASD to control your player", (Game.width / 2) - 300, 350);
-            g.drawString("- Press ESC to exit the game", (Game.width / 2) - 300, 400);
-
-
+            g.drawString("- Press ESC (while in game) to go back to the main menu", (Game.width / 2) - 300, 400);
+            g.drawString("- Press ESC (while on main menu) to exit the game", (Game.width / 2) - 300, 450);
+            
             g.drawRect((Game.width / 2) - 100, (Game.height - 100), 200, 50);
             g.drawString("Back", (Game.width / 2) - 30, Game.height - 65);
         }
@@ -83,6 +83,7 @@ public class Menu extends MouseAdapter {
 
         if(mouseOverElement(mouseX, mouseY, (Game.width / 2) - 100, (Game.height - 100), 200, 50)  && game.currentState == Game.STATE.Help){
             game.currentState = Game.STATE.Menu;
+            GameState.reset();
         }
 
         if(mouseOverElement(mouseX, mouseY, (Game.width / 2) - 100, 400, 200, 50)  && game.currentState == Game.STATE.Menu){
@@ -91,9 +92,8 @@ public class Menu extends MouseAdapter {
 
         if(mouseOverElement(mouseX, mouseY, (Game.width / 2) - 100, (Game.height - 150), 200, 50)  && game.currentState == Game.STATE.End){
             game.currentState = Game.STATE.Menu;
+            GameState.reset();
         }
-
-
     }
 
     @Override

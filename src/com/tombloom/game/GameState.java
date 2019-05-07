@@ -21,4 +21,10 @@ public class GameState {
     public static void setHealth(float value){
         health = value;
     }
+
+    public static void reset(){
+        health = 100;
+        score = 0;
+        level = 1;
+    }
 }

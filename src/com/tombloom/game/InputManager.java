@@ -42,8 +42,13 @@ public class InputManager extends KeyAdapter {
             }
         }
         if(key == KeyEvent.VK_ESCAPE){
-            //game.currentState = Game.STATE.Menu;
-            System.exit(1);
+            if(game.currentState == Game.STATE.Menu){
+                System.exit(1);
+            }
+
+            game.currentState = Game.STATE.Menu;
+            objectUpdater.clearAllGameObjects();
+            GameState.reset();
         }
 
     }

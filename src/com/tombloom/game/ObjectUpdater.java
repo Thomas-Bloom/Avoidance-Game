@@ -18,8 +18,8 @@ public class ObjectUpdater {
     }
 
     public void render(Graphics g){
-        for (GameObject go : objectList) {
-            go.render(g);
+        for(int i = 0; i < objectList.size(); i++){
+            objectList.get(i).render(g);
         }
     }
 
@@ -42,5 +42,9 @@ public class ObjectUpdater {
                 }
             }
         }
+    }
+
+    public void clearAllGameObjects(){
+        objectList.clear();
     }
 }
