@@ -15,5 +15,4 @@ New types of enemies spawn depending on which level you are on.
 4. Compile and run the code within your IDE
 
 ## Images
-![alt text]("Gameplay")
-![alt text]("Main Menu")
+![alt text](https://github.com/Thomas-Bloom/Avoidance-Game/blob/master/Gameplay.png)
